@@ -13,7 +13,16 @@ function refresh(){
 	ap=document.getElementById("actionPoint");
 	ap.innerHTML="点击图片执行动作，当前还剩下"+actionPoint+"点行动点";
 }
+function hidetext(){
+	show=document.getElementById("show");
+	show.innerHTML= " ";
+}
+function showtext(inner){
+	show=document.getElementById("show");
+	show.innerHTML=inner;
+}
 function seartch(){
+	hidetext();
 	if (actionPoint>=3)
 	{
 		actionPoint=actionPoint-3;
@@ -22,8 +31,23 @@ function seartch(){
 		{
 			var length=bag.length;
 			bag[length]="绷带";
-			show=document.getElementById("show");
-			show.innerHTML="你获得了一个绷带。";
+			showtext("你获得了一个绷带。");
+		}
+		else if (searchPoint==2)
+		{
+			var length=bag.length;
+			bag[length]="金币";
+			showtext("你获得了一个金币。");
+		}
+		else if (searchPoint==3)
+		{
+			var length=bag.length;
+			bag[length]="宝藏";
+			showtext("你获得了一个宝藏！你可以在后面的探险中用到它。");
+		}
+		else
+		{
+			showtext("你什么也没有得到。");
 		}
 		refresh();
 	}

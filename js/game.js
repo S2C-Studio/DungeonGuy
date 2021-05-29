@@ -2,7 +2,8 @@ function newgame(){
 	health = 100;
 	layer = 1;
 	room = 1;
-	actionPoint = 3;
+	actionPoint = 100;
+	bag = new Array();
 }
 function refresh(){
 	x=document.getElementById("health");
@@ -13,7 +14,19 @@ function refresh(){
 	ap.innerHTML="点击图片执行动作，当前还剩下"+actionPoint+"点行动点";
 }
 function seartch(){
-	console.log("seartch")
+	if (actionPoint>=3)
+	{
+		actionPoint=actionPoint-3;
+		var searchPoint=Math.floor(Math.random() * 3);	
+		if (searchPoint==1)
+		{
+			var length=bag.length;
+			bag[length]="绷带";
+			show=document.getElementById("show");
+			show.innerHTML="你获得了一个绷带。";
+		}
+		refresh();
+	}
 }
 newgame();
 refresh();

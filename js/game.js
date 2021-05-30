@@ -7,13 +7,38 @@ function newgame(){
 	金币 = 0;
 	攻击力 = 1;
 }
+function showFightEnd()
+{
+	var 怪物血量=25;
+}
+function fighttest()
+{
+	if (room==8)
+	{
+		if (layer>1)
+		{
+			showtext("你遇到了一个怪物……请等待以查看结果。");
+			setTimeout(showFightEnd,3000)
+		}
+	}
+}
 function refresh(){
 	x=document.getElementById("health");
 	x.innerHTML="生命 "+health;
 	x=document.getElementById("layerAndRoom");
 	x.innerHTML="你当前在第"+layer+"层第"+room+"个房间。";
 	ap=document.getElementById("actionPoint");
-	ap.innerHTML="点击图片执行动作，当前还剩下"+actionPoint+"点行动点";
+	ap.innerHTML="点击图片执行动作，当前还剩下"+actionPoint+"点行动点，还有"+金币+"个金币。";
+	商店图标=document.getElementById("shopImage");
+	if (room==4)
+	{
+		商店图标.src="img/shop.png";
+	}
+	else
+	{
+		商店图标.src="img/noShop.png";
+	}
+	fighttest()
 }
 function hidetext(){
 	show=document.getElementById("show");
@@ -80,6 +105,45 @@ function 下一个房间(){
 		showtext("你进入了一个新房间！");
 	}
 	refresh();
+}
+function 商店(){
+	if (room==4)
+	{
+		var random=Math.random();
+		if (random>0.5)
+		{
+			var 商品="稀有武器配件";
+		}
+		else
+		{
+			var 商品="绷带";
+		}
+		if (商品=="稀有武器配件")
+		{
+			if (金币>=4)
+			{
+				金币=金币-4;
+				showtext("购买稀有武器配件成功。攻击力增加5点。");
+				攻击力=攻击力+5;
+				console.log(攻击力);
+			}
+			else
+			{
+				showtext("金币不足。")
+			}
+		}
+		else
+		{
+			金币=金币-3;
+			showtext("购买绷带成功。");
+			药物=药物+5;
+			console.log(药物);
+		}
+	}
+	else
+	{
+		showtext("未开放。");
+	}
 }
 newgame();
 refresh();

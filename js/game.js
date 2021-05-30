@@ -2,8 +2,10 @@ function newgame(){
 	health = 100;
 	layer = 1;
 	room = 1;
-	actionPoint = 100;
-	bag = new Array();
+	actionPoint = 4;
+	药物 = 0;
+	金币 = 0;
+	攻击力 = 1;
 }
 function refresh(){
 	x=document.getElementById("health");
@@ -29,28 +31,55 @@ function seartch(){
 		var searchPoint=Math.floor(Math.random() * 3);	
 		if (searchPoint==1)
 		{
-			var length=bag.length;
-			bag[length]="绷带";
+			药物 = 药物+1;
 			showtext("你获得了一个绷带。");
 		}
 		else if (searchPoint==2)
 		{
-			var length=bag.length;
-			bag[length]="金币";
+			金币 = 金币+1;
 			showtext("你获得了一个金币。");
-		}
-		else if (searchPoint==3)
-		{
-			var length=bag.length;
-			bag[length]="宝藏";
-			showtext("你获得了一个宝藏！你可以在后面的探险中用到它。");
 		}
 		else
 		{
-			showtext("你什么也没有得到。");
+			攻击力 = 攻击力+1;
+			showtext("你获得了一个武器配件！攻击力+1。");
 		}
 		refresh();
 	}
+}
+function treat(){
+	hidetext();
+	if (actionPoint>=2)
+	{
+		if (药物>=1)
+		{
+			actionPoint=actionPoint-2;
+			药物=药物-1;
+			health=health+5;
+			showtext("你使用了一个绷带。生命+5。");
+		}
+		else
+		{
+			showtext("你没有绷带了！");
+		}
+		refresh();
+	}
+}
+function 下一个房间(){
+	hidetext();
+	actionPoint = 4;
+	if (room==10)
+	{
+		layer=layer+1;
+		room = 1;
+		showtext("你进入了一个新楼层！");
+	}
+	else
+	{
+		room=room+1;
+		showtext("你进入了一个新房间！");
+	}
+	refresh();
 }
 newgame();
 refresh();

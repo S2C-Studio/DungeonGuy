@@ -9,7 +9,14 @@ function newgame(){
 }
 function showFightEnd()
 {
-	var 怪物血量=25;
+	怪物血量=25;
+	怪物攻击力=5;
+	for (;怪物血量>0&&health>0;)
+	{
+		怪物血量=怪物血量-攻击力;
+		health=health-怪物攻击力;
+	}
+	//if (怪物血量)
 }
 function fighttest()
 {

@@ -6,27 +6,45 @@ function newgame(){
 	药物 = 0;
 	金币 = 0;
 	攻击力 = 1;
+	是否战斗中=0;
+	beenFight=0;
 }
 function showFightEnd()
 {
 	怪物血量=25;
 	怪物攻击力=5;
+	是否战斗中=1;
 	for (;怪物血量>0&&health>0;)
 	{
 		怪物血量=怪物血量-攻击力;
 		health=health-怪物攻击力;
 	}
-	//if (怪物血量)
+	if (怪物血量>0)
+	{
+		showtext("游戏结束，刷新以重新开始游戏。");
+	}
+	else
+	{
+		showtext("你胜利了！获得了5个金币。");
+		金币=金币+5;
+		是否战斗中=0;
+	}
+	beenFight=1;
+	refresh();
 }
 function fighttest()
 {
+	if (beenFight==0)
+	{
 	if (room==8)
 	{
 		if (layer>1)
 		{
+			是否战斗中=1;
 			showtext("你遇到了一个怪物……请等待以查看结果。");
 			setTimeout(showFightEnd,3000)
 		}
+	}
 	}
 }
 function refresh(){
@@ -57,6 +75,8 @@ function showtext(inner){
 }
 function seartch(){
 	hidetext();
+	if (是否战斗中==0)
+	{
 	if (actionPoint>=3)
 	{
 		actionPoint=actionPoint-3;
@@ -78,9 +98,12 @@ function seartch(){
 		}
 		refresh();
 	}
+	}
 }
 function treat(){
 	hidetext();
+	if (是否战斗中==0)
+	{
 	if (actionPoint>=2)
 	{
 		if (药物>=1)
@@ -96,9 +119,12 @@ function treat(){
 		}
 		refresh();
 	}
+	}
 }
 function 下一个房间(){
 	hidetext();
+	if (是否战斗中==0)
+	{
 	actionPoint = 4;
 	if (room==10)
 	{
@@ -111,9 +137,13 @@ function 下一个房间(){
 		room=room+1;
 		showtext("你进入了一个新房间！");
 	}
+	beenFight=0;
 	refresh();
+	}
 }
 function 商店(){
+	if (是否战斗中==0)
+	{
 	if (room==4)
 	{
 		var random=Math.random();
@@ -150,6 +180,7 @@ function 商店(){
 	else
 	{
 		showtext("未开放。");
+	}
 	}
 }
 newgame();

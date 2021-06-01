@@ -2,7 +2,7 @@ function newgame(){
 	health = 100;
 	layer = 1;
 	room = 1;
-	actionPoint = 4;
+	actionPoint = 5;
 	药物 = 0;
 	金币 = 0;
 	攻击力 = 1;
@@ -125,7 +125,7 @@ function 下一个房间(){
 	hidetext();
 	if (是否战斗中==0)
 	{
-	actionPoint = 4;
+	actionPoint = 5;
 	if (room==10)
 	{
 		layer=layer+1;
@@ -169,19 +169,82 @@ function 商店(){
 				showtext("金币不足。")
 			}
 		}
-		else
+		else if (商品=="绷带")
 		{
-			金币=金币-3;
-			showtext("购买绷带成功。");
-			药物=药物+5;
-			console.log(药物);
+			if (金币>=3)
+			{
+				金币=金币-3;
+				showtext("购买绷带成功。");
+				药物=药物+1;
+				console.log(药物);
+			}
+			else
+			{
+				showtext("金币不足。")
+			}
 		}
-	}
 	else
 	{
 		showtext("未开放。");
+		}
 	}
 	}
+	refresh()
+}
+function seartchButtonTouch()
+{
+	if (是否战斗中==0)
+	{
+		seatchButton=document.getElementById("seartchButton");
+		seatchButton.src="img/seartch buttonTouch.png";
+	}
+}
+function seartchButtonLeave()
+{
+	seatchButton=document.getElementById("seartchButton");
+	seatchButton.src="img/seartch button.png";
+}
+function pillButtonTouch()
+{
+	if (是否战斗中==0)
+	{
+		seatchButton=document.getElementById("pillButton");
+		seatchButton.src="img/pillTouch.png";
+	}
+}
+function pillButtonLeave()
+{
+	seatchButton=document.getElementById("pillButton");
+	seatchButton.src="img/pill.png";
+}
+function continueButtonTouch()
+{
+	if (是否战斗中==0)
+	{
+		seatchButton=document.getElementById("continue");
+		seatchButton.src="img/continueTouch.png";
+	}
+}
+function continueButtonLeave()
+{
+	seatchButton=document.getElementById("continue");
+	seatchButton.src="img/continue.png";
+}
+function shopButtonTouch()
+{
+	if (room==4)
+	{
+		if (是否战斗中==0)
+		{
+			seatchButton=document.getElementById("shopImage");
+			seatchButton.src="img/shopTouch.png";
+		}
+	}
+}
+function shopButtonLeave()
+{
+	seatchButton=document.getElementById("shopImage");
+	seatchButton.src="img/shop.png";
 }
 newgame();
 refresh();

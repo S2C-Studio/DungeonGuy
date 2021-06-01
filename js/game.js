@@ -243,8 +243,14 @@ function shopButtonTouch()
 }
 function shopButtonLeave()
 {
-	seatchButton=document.getElementById("shopImage");
-	seatchButton.src="img/shop.png";
+	if (room==4)
+	{
+		if (是否战斗中==0)
+		{
+			seatchButton=document.getElementById("shopImage");
+			seatchButton.src="img/shop.png";
+		}
+	}
 }
 newgame();
 refresh();
